@@ -13,7 +13,6 @@ async def main():
     sleep(3)
     while elementFooter:
         elementContent = await page.evaluate('(element) => element.textContent', elementFooter)
-        # print(elementContent)
         print('Hidden matches found ... Showing up. \n', elementContent)
         await page.click('.footer')
         sleep(3)
