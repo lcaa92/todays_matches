@@ -29,8 +29,21 @@ async def main():
     elements = tbodyElement.find_all('tr')
 
     for el in elements:
-        print(el)
-
+        soupEl = el.find_all('td')
+        country_championship =  soupEl[1].find('a').get('title').split('-')
+        country = country_championship[0].rstrip()
+        championship = country_championship[1].lstrip()
+        team_home = soupEl[4].find('p').text
+        team_visitor = soupEl[6].find('p').text
+        link_details = soupEl[7].find('a').get('href')
+        jsonObj = {
+            "country": country,
+            "championship": championship,
+            "team_home": team_home,
+            "team_visitor": team_visitor,
+            "link_details": link_details
+        }
+        print(jsonObj)
 
 if __name__ == '__main__':
     asyncio.get_event_loop().run_until_complete(main())
